@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+</head>
+<body>
+    
+    <button id="btn">눌러주세요</button>
+    <hr>
+    <div id="message"></div>
+
+    <script>
+        // 1. button을 찾아서
+        const btn = document.querySelector('#btn');
+        // 2. 클릭 이벤트 연결
+        btn.onclick = function(event) {
+            // alert('눌러 주셔서 감사합니다.');
+
+            // 3. div를 찾아서
+            const msg = document.querySelector('#message');
+            // 4. 현재 시각을 표시
+            msg.innerHTML = `현재 시각은 ${new Date()}`;
+        }    
+    </script>
+</body>
+</html>

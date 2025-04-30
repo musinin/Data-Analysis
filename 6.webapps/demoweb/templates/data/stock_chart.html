@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block content_block %}
+
+<section class="p-t-20">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="au-card m-b-30">
+                    <div class="au-card-inner">
+                        <h3 class="title-2 m-b-40">Stock Price</h3>
+                        <form action="{{ url_for('data.stock_chart') }}" method="post">
+                          <div class="row form-group">                          
+                            <div class="col-3">
+                                <select name="stock1" class="form-control">
+                                {% for row in stock_code.values %}
+                                  <option value="{{ row[1] }}">{{ row[0] }}</option>
+                                {% endfor %}
+                                </select>
+                            </div>
+                            <div class="col-3">
+                              <select name="stock2" class="form-control">
+                                {% for row in stock_code.values %}
+                                  <option value="{{ row[1] }}">{{ row[0] }}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                            <div class="col-3">
+                              <select name="stock3" class="form-control">
+                                {% for row in stock_code.values %}
+                                  <option value="{{ row[1] }}">{{ row[0] }}</option>
+                                {% endfor %}
+                              </select>
+                            </div>
+                            <div class="col-3">
+                              <button type="submit" class="btn btn-info btn-block">
+                                조회
+                              </button>
+                            </div>
+                          </div>
+                          </form>
+                        <canvas id="stock-chart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end of row-->
+    </div> <!-- end of container-->
+</section>
+
+{% endblock %}
+
+{% block js_block %}
+
+<script>
+{% if quotes %}
+try {
+    //Sales chart
+    var ctx = document.querySelector("#stock-chart");
+    if (ctx) {
+      ctx.height = 150;
+      var myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: {{ quotes[0][1]|safe }}, // : |safe --> 문자열을 있는 그대로 표현
+          type: 'line',
+          defaultFontFamily: 'Poppins',
+          datasets: [{
+            label: '{{ quotes[0][0]|safe }}',
+            data: {{ quotes[0][2] }},
+            backgroundColor: 'transparent',
+            borderColor: 'rgba(220,53,69,0.75)',
+            borderWidth: 1,
+            pointStyle: 'circle',
+            pointRadius: 1,
+            pointBorderColor: 'transparent',
+            pointBackgroundColor: 'rgba(220,53,69,0.75)',
+          }, {
+            label: '{{ quotes[1][0]|safe }}',
+            data: {{ quotes[1][2] }},
+            backgroundColor: 'transparent',
+            borderColor: 'rgba(40,167,69,0.75)',
+            borderWidth: 1,
+            pointStyle: 'circle',
+            pointRadius: 1,
+            pointBorderColor: 'transparent',
+            pointBackgroundColor: 'rgba(40,167,69,0.75)',
+          }, {
+            label: '{{ quotes[2][0]|safe }}',
+            data: {{ quotes[2][2] }},
+            backgroundColor: 'transparent',
+            borderColor: 'rgba(40,53,200,0.75)',
+            borderWidth: 1,
+            pointStyle: 'circle',
+            pointRadius: 1,
+            pointBorderColor: 'transparent',
+            pointBackgroundColor: 'rgba(40,53,200,0.75)',
+          }]
+        },
+        options: {
+          responsive: true,
+          tooltips: {
+            mode: 'index',
+            titleFontSize: 12,
+            titleFontColor: '#000',
+            bodyFontColor: '#000',
+            backgroundColor: '#fff',
+            titleFontFamily: 'Poppins',
+            bodyFontFamily: 'Poppins',
+            cornerRadius: 3,
+            intersect: false,
+          },
+          legend: {
+            display: true,
+            labels: {
+              usePointStyle: false,
+              fontFamily: 'Poppins',
+            },
+          },
+          scales: {
+            xAxes: [{
+              display: true,
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              scaleLabel: {
+                display: false,
+                labelString: 'Month'
+              },
+              ticks: {
+                fontFamily: "Poppins"
+              }
+            }],
+            yAxes: [{
+              display: true,
+              gridLines: {
+                display: false,
+                drawBorder: false
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'Value',
+                fontFamily: "Poppins"
+
+              },
+              ticks: {
+                fontFamily: "Poppins"
+              }
+            }]
+          },
+          title: {
+            display: false,
+            text: 'Normal Legend'
+          }
+        }
+      });
+    }
+
+
+  } catch (error) {
+    console.log(error);
+  }
+{% endif %}
+
+</script>
+
+{% endblock %}

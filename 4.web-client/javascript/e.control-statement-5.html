@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>control Statement</title>
+</head>
+<body>
+    
+    <script>
+        // 1~10 난수발생-> 7이 나올 때까지 숫자를 더해서 출력
+        let sum = 0;
+        let numbers = [];
+        let n;
+        do {
+            n = math.floor(math.random() * 10) + 1;    // 1~10(포함)
+
+            numbers.push(n);
+            sum +=n;
+            } while(n!=7);  // 조건검사를 뒤에서
+            
+            document.write(`<h2>결과: [${numbers}] [${sum}]</h2>`);
+
+
+    </script>
+</body>
+</html>

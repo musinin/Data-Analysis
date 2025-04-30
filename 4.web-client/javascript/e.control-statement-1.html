@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>control Statement</title>
+</head>
+<body>
+    
+    <script>
+        const n = Math.floor(Math.random() * 9) + 1; // 1 ~ 10(미포함) 범위의 난수 발생
+        console.log(`selected number : ${n}`);
+        document.write(`<h2>selected number : ${n}</h2>`);
+
+        // 3의배수, 4의배수, 5의배수인지 검사하고 출력
+        if (n % 3 == 0) {
+            document.write(`<h3>${n}은 3의 배수입니다.</h3>`);
+        } else if (n % 4 == 0) {
+            document.write(`<h3>${n}은 4의 배수입니다.</h3>`);
+        } else if (n % 5 == 0) {
+            document.write(`<h3>${n}은 5의 배수입니다.</h3>`);
+        } else {
+            document.write(`<h3>${n}은 이도 저도 아닌 수입니다.</h3>`);
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Element</title>
+</head>
+<body>
+
+    <button id="selectBtn"></button>
+    
+    <table id="numbersTbl">
+        <tr id="buttonRow"></tr>
+        <tr id="numbersRow"></tr>
+    </table>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script>  
+
+        // button 요소 찾기
+        const btn = $("#selectBtn");
+        btn.html("SELECT WINNING NUMBERS");
+        btn.css({'width': '335px', 'height': '50px'});
+
+        // td1 요소 만들기 + button 요소 추가
+        const td1 = $('<td></td>');
+        td1.attr('colspan', 6);
+        td1.append(btn);
+
+        // button tr 요소 찾기 + td1 추가
+        const tr1 = $("#buttonRow");
+        tr1.append(td1);
+
+        // numbers tr 요소 찾기
+        const tr2 = $("#numbersRow");
+
+        // tb요소 6개 만들기 -> tr에 추가
+        for (let i =0; i<6; i++){               // python: for i in range(6):
+            const td = $('<td></td>');          // 새 요소 만들기
+            td.css({'width': '50px', 
+                    'height' : '50px', 
+                    'text-align':'center', 
+                    'border' : 'solid 1px'});
+            tr2.append(td);                // td요소를 tr요소의 자식으로 추가
+        }     
+        
+        ////////////////////////////////////////////////////////////////////////
+        // button click 이벤트 처리기 연결
+        btn.on('click', (event) => {
+            tds = $('#numbersRow td');
+            tds.each(function(idx, td){
+                // 번호 뽑기 (1 ~ 45 범위 난수)
+                n = Math.floor(Math.random() * 45) + 1;
+                // 번호 표시
+                $(td).html(n);
+            })
+        });
+    </script>    
+</body>
+</html>
+

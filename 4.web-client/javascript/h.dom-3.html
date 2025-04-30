@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+</head>
+<body>
+    
+    <table border="1" width="600" height="70" align="center">
+        <tr>
+            <td id="red" style="background-color: red;"></td>
+            <td id="orange" style="background-color: orange;"></td>
+            <td id="yellow" style="background-color: yellow;"></td>
+            <td id="green" style="background-color: green;"></td>
+            <td id="blue" style="background-color: blue;"></td>
+            <td id="navy" style="background-color: navy;"></td>
+            <td id="purple" style="background-color: purple;"></td>
+            <td id="random"></td>
+        </tr>
+    </table>
+    <br>
+    <div id="canvas" style="border: solid 1px; width:600px; height:400px; margin:0 auto"></div>
+
+    <script>
+
+        const canvas = document.querySelector('#canvas');
+
+        // 1. red button을 찾아서
+        const redBtn = document.querySelector("#red");
+        // 2. click event 연결
+        redBtn.onclick = (event) => { canvas.style.backgroundColor = 'red'; }
+
+        // 다른 버튼에도 위 1, 2 적용
+        const orangeBtn = document.querySelector("#orange");
+        orangeBtn.onclick = (event) => { canvas.style.backgroundColor = 'orange'; }
+
+        const yellowBtn = document.querySelector("#yellow");
+        yellowBtn.onclick = (event) => { canvas.style.backgroundColor = 'yellow'; }
+
+        const randomBtn = document.querySelector("#random");
+        randomBtn.onclick = (event) => { 
+            r = Math.floor(Math.random() * 256); // 0 ~ 255(포함) 정수
+            g = Math.floor(Math.random() * 256); // 0 ~ 255(포함) 정수
+            b = Math.floor(Math.random() * 256); // 0 ~ 255(포함) 정수
+            canvas.style.backgroundColor = `rgb(${r},${g},${b})`; // 색상 스타일 값 : rgb(빨,초,파)
+        }    
+    </script>
+</body>
+</html>

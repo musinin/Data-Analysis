@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>control Statement</title>
+</head>
+<body>
+    
+    <script>
+        // 1~10 난수발생-> 7이 나올 때까지 숫자를 더해서 출력
+        // const n = 10;
+        // let n2 = 10;        
+        // n = 20;     // 오류: const는 값 고정
+        // n2 = 30;    // 정상 처리
+        let sum = 0;
+        let numbers = [];
+        while (true){
+            const n = math.floor(math.random() * 10) + 1 ;   // 1~10(포함)
+            if (n==7){
+                break;
+            }
+            numbers.push(n);
+            sum +=n;
+        }
+        document.write(`<h2>결과: [${numbers}] [${sum}]</h2>`);
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

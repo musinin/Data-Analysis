@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding ="utf-8" standalone="yes" ?>
+
+<persons count = "2"> <!-- 문서의 최상위 요소는 반드시 하나만 -->
+    <person id="1">
+        <name>John Doe</name>
+        <phone>010-1234-5678</phone>
+        <email>johndoe@example.com</email>
+        <age /> <!-- <age></age> 와 동일-->
+    </person>
+
+    <person id="2">
+        <name>Jane Doe</name>
+        <phone>010-5678-1234</phone>
+        <email>janedoe@example.com</email>
+        <desc>my name is &lt;Jane Doe&gt; <!--특수문자를 표현하기 위한것--></desc>
+        <![CDATA[이 영역의 데이터는 <XML> 문법 적용을 받지 않습니다. ]]>
+    </person>
+</persons>

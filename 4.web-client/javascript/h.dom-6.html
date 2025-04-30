@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANGE MONEY</title>
+</head>
+<body>
+    
+    <table>
+        <tr>
+            <td>
+                <label for="dollarInput">달러:</label>
+                <input id="dollarRow", type="text">
+            </td>
+        </tr>
+        <tr id="buttonRow">
+            <td>
+                <button id="selectBtn"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label for="wonInput">원:</label>
+                <input id="wonRow", type="text">
+            </td>
+        </tr>
+    </table>
+
+    <script> 
+
+        const exchange = 1465.46; 
+
+        const btn = document.querySelector("#selectBtn");
+        btn.innerHTML = "CHANGE MONEY";
+        btn.style.width = "200px";
+        btn.style.height = "50px";
+
+        const tr1 = document.querySelector("#dollarRow").value;
+        const tr3 = document.querySelector("#wonRow").value;
+
+        const td2 = document.createElement('td');
+        td2.appendChild(btn);
+        const tr2 = document.querySelector("#buttonRow");
+        tr2.appendChild(td2);
+
+
+        btn.onclick = (event) => {
+            if (tr1){
+                tr1 * exchange;
+
+            }
+            else if (tr2){
+                tr2 / exchange;
+            }
+            else{
+                print('오류입니다')
+            }
+        }
+
+    </script>    
+</body>
+</html>
+
+

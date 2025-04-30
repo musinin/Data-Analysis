@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funtion</title>
+</head>
+<body>
+    
+    <script>
+        function sum_values(n1, n2){
+            sum = n1 + n2;
+            return sum; //함수종료 + sum을 호출한 곳에 반환
+        }
+        
+        function executor(func, v1, v2){
+            return func(v1, v2);
+        }
+
+        // 1. 함수를 변수에 저장    (사용 사례 거의 없음)
+        const sum_function = sum_values;    // 함수를 변수에 저장 -> 변수는 함수처럼 사용가능
+        const r1 = sum_function(10, 20);
+        document.write(`<h2> ${r1} </h2>`);
+
+        // 2. 함수를 전달인자로 사용 (사용 사례 높음)
+        const r2 = executor(sum_values, 10, 20);
+        document.write(`<h2> ${r2} </h2>`);
+
+        // 3. 익명 함수 사용 1      (사용 사례 거의 없음)
+        const sum_function2 = function(n1, n2){return n1 + n2;}
+        const r3 = executor(sum_function2, 10, 20);
+        document.write(`<h2> ${r3} </h2>`);
+
+        // 4. 익명 함수 사용 2      (사용 사례 높음)
+        const r4 = executor(function(n1, n2) {return n1 + n2;}, 10, 20);
+        document.write(`<h2> ${r4} </h2>`);
+
+        // 5. 화살표 함수 사용 1     (사용 사례 거의 없음)
+        const sum_function3 = (n1, n2) => n1 + n2;
+        const r5 = executor(sum_function3, 10, 20);
+        document.write(`<h2> ${r5} </h2>`);
+
+        // 6. 화살표 함수 사용 2      (사용 사례 높음)
+        const r6 = executor((n1, n2) => n1 + n2, 10, 20);
+        document.write(`<h2> ${r6} </h2>`);
+
+        // 익명함수와 화살표함수는 재사용하지 않고 한번만 사용할때 사용
+
+
+
+
+
+
+    </script>
+</body>
+</html>

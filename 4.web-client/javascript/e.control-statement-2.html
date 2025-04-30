@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>control Statement</title>
+</head>
+<body>
+    
+    <script>
+        // 점수 3개 만들기 (난수) -> 평균 계산 -> 등급 결정 -> 출력
+
+        // const n1 = Math.floor(Math.random() * 101); // 0 ~ 100(미포함) 범위의 난수 발생
+        // const n2 = Math.floor(Math.random() * 101); // 0 ~ 100(미포함) 범위의 난수 발생
+        // const n3 = Math.floor(Math.random() * 101); // 0 ~ 100(미포함) 범위의 난수 발생
+        // document.write(`<h2>scores : ${n1}, ${n2}, ${n3}</h2>`);
+
+        let scores = []
+        for (let i = 0; i < 3; i +=1){  // for i in range(3)
+            const n =  Math.floor(Math.random() * 101); // 0 ~ 100(미포함) 범위의 난수 발생
+            scores.push(n); // -> scores.append(n)
+        }
+        document.write(`<h2>scores : ${scores[0]}, ${scores[1]}, ${scores[2]}</h2>`);
+        
+        let sum = 0
+        for (let i = 0; i < scores.length; i++){    // i++ , i+=1 , i=i+1 동일
+            sum += scores[i];
+        }
+        const avg = sum / scores.length;
+        document.write(`<h2>total : ${sum}, average : ${avg}</h2>`);
+        
+        let grade;
+        if (avg >= 90 && avg <= 100) { // -----> avg >= 90 and avg <= 100
+            grade = 'A';
+        } else if (avg >= 80 && avg < 90) {
+            grade = 'B';
+        } else if (avg >= 70 && avg < 80) {
+            grade = 'C';
+        } else if (avg >= 60 && avg < 70) {
+            grade = 'D';
+        } else if (avg >= 0 && avg < 60) {
+            grade = 'F';
+        } else {
+            grade = '유효하지 않은 점수';
+        }
+        document.write(`<h2>grade : ${grade}</h2>`);
+
+    </script>
+</body>
+</html>

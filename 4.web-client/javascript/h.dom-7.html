@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Element</title>
+    <style type="text/css">
+        table{
+            width: 350px;
+            border-spacing: 5px;
+        }
+        #imagesRow img {
+            width: 100px;
+            height: 100px;
+            border: solid 2px;
+        }
+        #buttonRow button {
+            width: 100%;
+            height: 50px;
+        }
+        #summaryRow td{
+            width: 105px;
+            text-align: center;
+            vertical-align: center;
+            font-size: 30pt;
+        }
+        #summaryRow img{
+            width: 100%;
+        }
+        #resultRow img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <table>
+        <tr id="imagesRow">
+            <td><img src="images/scissors.png" data-no="1"></td>
+            <td><img src="images/rock.png" data-no="2"></td>
+            <td><img src="images/paper.png" data-no="3"></td>
+        </tr>
+        <tr id="buttonRow">
+            <td colspan="3">
+                <button>게임 시작</button>
+            </td>
+        </tr>
+        <tr id="summaryRow">
+            <td><img id="userImg" src=""></td>
+            <td>VS</td>
+            <td><img id="comImg" src=""></td>
+        </tr>
+        <tr id="resultRow">
+            <td colspan="3">
+                <img src="">
+            </td>
+        </tr>
+    </table>
+
+    <script>
+
+        let userNo = null;       // 사용자가 선택한 가위/바위/보 번호를 저장하는 변수
+        let comNo = null;        // Random 선택한 컴퓨터의 가위/바위/보 번호를 저장하는 변수
+        let selectedImg = null;  // 사용자가 선택한 가위/바위/보 이미지를 저장하는 변수
+
+        // 1-1. 첫 행의 img 요소를 찾아서
+        const imgs = document.querySelectorAll("#imagesRow img");
+
+        // 1-2. click 이벤트 연결 - data-no 속성 값 변수에 저장: 
+        for (let i = 0; i < imgs.length; i++) {
+            imgs[i].onclick = function(event) {
+                const clickedImg = event.target;              // 현재 이벤트가 발생한 img
+                // alert(clickedImg.src); 
+                // alert(clickedImg.getAttribute('data-no')); // <img data-no='9'일때 9반환
+                userNo = clickedImg.getAttribute('data-no');  // 선택된 가위/바위/보 번호 저장
+                clickedImg.style.border = "solid 2px red";    // 선택된 이미지의 외곽선 설정
+                if (selectedImg != null){                     // 이전에 선택한 이미지가 있는 경우
+                    selectedImg.style.border = "";
+                }
+                selectedImg = clickedImg;                     // 선택된 이미지 객체 저장
+            }  
+        }
+
+        /////////////////////////////////////////////////////////////
+        // 결과를 표시할 이미지 객체를 찾아서 변수에 저장
+        const resultImg = document.querySelector('#resultRow img');
+
+        // 2-1. button 요소를 찾아
+        const btn = document.querySelector('#buttonRow button');
+        // 2-2. click 이벤트 처리기 연결
+        btn.onclick = function(event){
+            // 3-1. random number 뽑기 1,2,3
+            comNo = Math.floor(Math.random() * 3) + 1; // 1,2,3 중 하나를 뽑기
+
+            // 3-2. 선택된 이미지 표시
+            userImg = document.querySelector("#userImg");
+            switch (userNo){
+                case "1":userImg.src = 'images/scissors.png';break;
+                case "2":userImg.src = 'images/rock.png';break;
+                case "3":userImg.src = 'images/paper.png';break;
+            }
+
+            comImg = document.querySelector("#comImg");
+            switch (comNo){
+                case 1:comImg.src = 'images/scissors.png';break;
+                case 2:comImg.src = 'images/rock.png';break;
+                case 3:comImg.src = 'images/paper.png';break;
+            }
+            
+            
+            
+            
+            // 3-3. 비교 -> 승패 결정-> 변수 저장
+            if ((userNo == 1 && comNo == 3) || 
+                (userNo == 2 && comNo == 1) ||
+                (userNo == 3 && comNo == 2)){          // 사용자가 이기는 조건
+                //alert('당신이 이겼어요');
+                resultImg.src = 'images/win.png';
+            } else if (userNo == comNo){               // 비기는 경우
+                //alert('비겼어요');
+                resultImg.src = 'images/draw.png';
+            } else{                                    // 지는 경우
+                //alert('컴퓨터가 이겼어요');
+                resultImg.src = 'images/lose.png';
+            }
+        }
+    </script>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

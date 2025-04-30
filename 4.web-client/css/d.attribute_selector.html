@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Attribute_selector</title>
+    <style type = "text/css">
+        input[value]{ color:rgb(201, 143, 255) } /* value 속성이 있는 input */
+        input[value="abcdef"]{ color:rgb(255, 143, 199) } /* value="abcdef" 인 input */
+        input[value*="defg"]{ color:rgb(141, 241, 220) } /* value 속성의 값에 "defg" 가 포함된 input */
+        input[value$="ijk"]{ color:rgb(255, 203, 143) } /* value 속성의 값이 "ijk"로 끝나는 input */
+        a[href^="https"]{ color:rgb(143, 164, 255) } /* target 속성의 값이 "https" 로 시작하는 a */
+    </style>
+</head>
+<body>
+    <input type="text" value="abc" readonly><br><br>
+    <input type="text" value="abcdef" readonly><br><br>
+    <input type="text" value="abcdefghi" readonly><br><br>
+    <input type="text" value="abcdefghijk" readonly><br><br>
+    <a href="https://developers.google.com">구글 개발자 사이트 1</a>
+    <a href="http://developers.google.com">구글 개발자 사이트 2</a><br><br>
+</body>
+</html>

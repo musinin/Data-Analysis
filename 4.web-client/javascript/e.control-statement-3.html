@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>control Statement</title>
+</head>
+<body>
+    
+    <script>
+        const n = Math.floor(Math.random() * 5); // 0 ~ 5(미포함) 범위의 난수 발생
+        switch(n) {
+            case 0:
+                document.write(`<h2>오늘 저녁은 금식입니다.</h2>`);
+                break;  //witch-case 문을 종료하는 명령
+            case 1:
+                document.write(`<h2>오늘 저녁은 치킨입니다.</h2>`);
+                break;
+            case 2:
+                document.write(`<h2>오늘 저녁은 돼지불백입니다.</h2>`);
+                break;
+            default:
+                document.write(`<h2>선택하지 않았습니다.</h2>`);
+        }
+
+    </script>
+</body>
+</html>

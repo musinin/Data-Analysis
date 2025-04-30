@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Element</title>
+</head>
+<body>
+
+    <button id="selectBtn"></button>
+    
+    <table id="numbersTbl">
+        <tr id="buttonRow"></tr>
+        <tr id="numbersRow"></tr>
+    </table>
+
+    <script>  
+
+        // button 요소 찾기
+        const btn = document.querySelector("#selectBtn");
+        btn.innerHTML = "SELECT WINNING NUMBERS";
+        btn.style.width = "335px";
+        btn.style.height = "50px";
+
+        // td1 요소 만들기 + button 요소 추가
+        const td1 = document.createElement('td');
+        td1.setAttribute("colspan", 6); // < td colspan="6"으로 설정
+        td1.appendChild(btn);
+
+        // button tr 요소 찾기 + td1 추가
+        const tr1 = document.querySelector("#buttonRow");
+        tr1.appendChild(td1);
+
+        // numbers tr 요소 찾기
+        const tr2 = document.querySelector("#numbersRow");
+
+        // tb요소 6개 만들기 -> tr에 추가
+        for (let i =0; i<6; i++){                       // python: for i in range(6):
+            const td = document.createElement('td');    // 새 요소 만들기
+            td.style.width = '50px';
+            td.style.height = '50px';
+            td.style.textAlign = 'center';
+            td.style.border = 'solid 1px';
+            tr2.appendChild(td);                         // td요소를 tr요소의 자식으로 추가
+        }     
+        
+        ////////////////////////////////////////////////////////////////////////
+        // button click 이벤트 처리기 연결
+        // btn.onclick = function(event) {
+        btn.onclick = (event) => {
+
+            tds = document.querySelectorAll('#numbersRow td');
+
+            for (let i = 0; i < tds.length; i++) {
+                // 번호 뽑기 (1 ~ 45 범위 난수)
+                n = Math.floor(Math.random() * 45) + 1;
+                // 번호 표시
+                tds[i].innerHTML = n;
+            }
+
+        }
+    </script>    
+</body>
+</html>
+

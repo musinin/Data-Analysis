@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+</head>
+<body>
+    
+    <table border="1" width="600" height="70" align="center">
+        <tr>
+            <td id="red" style="background-color: red;"></td>
+            <td id="orange" style="background-color: orange;"></td>
+            <td id="yellow" style="background-color: yellow;"></td>
+            <td id="green" style="background-color: green;"></td>
+            <td id="blue" style="background-color: blue;"></td>
+            <td id="navy" style="background-color: navy;"></td>
+            <td id="purple" style="background-color: purple;"></td>
+            <td id="random"></td>
+        </tr>
+    </table>
+    <br>
+    <div id="canvas" style="border: solid 1px; width:600px; height:400px; margin:0 auto"></div>
+
+    <script>
+        // 3. id = 'canvas'인 div 찾기
+        const canvas = document.querySelector('#canvas');
+
+        // 1. 모든 td 찾기
+        //const tds = document.querySelector('td');  // querySelector: 첫번째 td 1개 찾기
+        const tds = document.querySelectorAll('td'); // querySelectorAll: 모든 td 찾기
+        // alert(tds.lengh);                         // 개수 출력
+        
+        // 2. 각 td에 클릭 이벤트 처리기 연결하기
+        //for(td of tds){}
+        //for(td in tds){}
+        for(let i = 0; i < tds.length; i++){
+            tds[i].onclick = function(event) {
+                // 4. 찾은 div의 색상을 찾기
+                const currentTd = event.target;       // event.target: 현재 이벤트가 발생한 객체
+                canvas.style.backgroundColor = currentTd.style.backgroundColor;  // 현재 click된 td의 배경색 넣기
+            }
+        }
+ 
+        tds[tds.length-1].onclick = (event) => { 
+            r = Math.floor(Math.random() * 256); // 0 ~ 255(포함) 정수
+            g = Math.floor(Math.random() * 256); // 0 ~ 255(포함) 정수
+            b = Math.floor(Math.random() * 256); // 0 ~ 255(포함) 정수
+            canvas.style.backgroundColor = `rgb(${r},${g},${b})`; // 색상 스타일 값 : rgb(빨,초,파)
+        }
+
+    
+        
+    </script>    
+</body>
+</html>

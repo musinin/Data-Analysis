@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event</title>
+</head>
+<body>
+    
+    <table border="1" width="600" height="70" align="center">
+        <tr>
+            <td id="red" style="background-color: red;"></td>
+            <td id="orange" style="background-color: orange;"></td>
+            <td id="yellow" style="background-color: yellow;"></td>
+            <td id="green" style="background-color: green;"></td>
+            <td id="blue" style="background-color: blue;"></td>
+            <td id="navy" style="background-color: navy;"></td>
+            <td id="purple" style="background-color: purple;"></td>
+            <td id="random"></td>
+        </tr>
+    </table>
+    <br>
+    <div id="canvas" style="border: solid 1px; width:600px; height:400px; margin:0 auto"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.js"></script>
+    <script>
+
+        // jquery(document).ready(function(){
+        // $(document.ready(function(){     // jquery = $
+        $(function(){   // dom객체트리를 사용할수 있을때 호출
+            // 0. id = 'canvas'인 div 찾기
+            const canvas = $('#canvas');
+
+            // 1. 모든 td 찾기
+            const tds = $('td');
+
+            // 2. 각 td에 클릭 이벤트 처리기 연결하기        
+            tds.each(function(idx, td){  // for(let i = 0; i < tds.length - 1; i++) {
+                $(td).on('click', function(event){  // tds[i].onclick = function(event) {
+                    if(idx < tds.length-1){ // 마지막 td 가 아닌 경우
+                        canvas.css('backgroundColor', $(this).css ('backgroundColor')); 
+                    } else {
+                        r = Math.floor(Math.random() * 256); // 0 ~ 255(포함) 정수
+                        g = Math.floor(Math.random() * 256); // 0 ~ 255(포함) 정수
+                        b = Math.floor(Math.random() * 256); // 0 ~ 255(포함) 정수
+                        canvas.css('backgroundColor', `rgb(${r},${g},${b})`) // 색상 스타일 값 : rgb(빨,초,파)
+                    }
+                });
+            });        
+        });
+        
+    </script>    
+</body>
+</html>

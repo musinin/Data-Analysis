@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHANGE MONEY</title>
+</head>
+<body>
+    
+    <table border="1", align="center">
+        <tr>
+            <td>
+                달러: <input id="dollar" type="text">
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="exbtn" style="width:100%"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                원: <input id="won" type="text">
+            </td>
+        </tr>
+    </table>
+
+    <script>
+        const exchange = 1465.46;
+        const btn = document.querySelector("#exbtn");
+
+        btn.addEventListener("click", () => {
+            const tr1 = document.querySelector("#dollar").value;
+            const tr3 = document.querySelector("#won").value;
+
+            if (dollarValue && !wonValue) { // 달러 -> 원 변환
+                const dollar = parseFloat(dollarValue); // 문자열을 숫자로 변환
+                if (!isNaN(dollar)) {
+                    const krw = (dollar * exchange); // 원 계산
+                    document.querySelector("#wonRow").value = krw; // 원 필드의 value 속성 업데이트
+                } 
+                else {
+                    alert("달러에 올바른 숫자를 입력해주세요!");
+                }
+            } 
+            else if (wonValue && !dollarValue) { // 원 -> 달러 변환
+                const won = parseFloat(wonValue); // 문자열을 숫자로 변환
+                if (!isNaN(won)) {
+                    const usd = (won / exchange); // 달러 계산
+                    document.querySelector("#dollarRow").value = usd; // 달러 필드의 value 속성 업데이트
+                } 
+                else {
+                    alert("원에 올바른 숫자를 입력해주세요!");
+                }
+            } 
+            else {
+                alert("하나의 필드에만 값을 입력해주세요!");
+            }
+        });
+    </script>    
+
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array and Json</title>
+</head>
+<body>
+    
+    <script>
+        ar = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];           // python의 list와 유사한 복합객체
+        document.write(`<h3>${ar[0]},${ar[4]}</h3>`);       
+        document.write(`<h3>${ar.join('-')}</h3>`);     // python: '-'.join(ar)
+        
+        const person = {
+            "name" : "장동건",
+            "address" : "서울시강남구역삼동1",
+            "age" : 18,
+            "phone" : {
+                "mobile" : "010-1234-5678",
+                "office" : "02-9876-5432"
+            }
+        };
+        console.log(person.name);        // 객체 스타일 데이터 접근
+        console.log(person['name']);     // python style 데이터 접근
+        console.log(person.address);
+        console.log(person.phone.mobile);
+        console.log(person.phone.office);
+        console.log(person.age);
+        
+    </script>
+</body>
+</html>

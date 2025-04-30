@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>control Statement</title>
+</head>
+<body>
+    
+    <script>
+
+        a = [12, 6, 43, 7, 12, 42, 27, 36];
+        document.write(`<h3>`);
+        for (key in a){ // key: 배열에서 순서에 따라 순서번호를 한개씩 뽑아 key에 저장
+            document.write(`[${key} : ${a[key]}]`);
+        }
+        document.write(`</h3>`);
+
+        document.write(`<h3>`);
+        for (value of a){ // a배열에서 순서에 따라 값을 한개씩 뽑아 value에 저장
+            document.write(`[${value}]`);
+        }
+        document.write(`</h3>`);
+
+    </script>
+</body>
+</html>
