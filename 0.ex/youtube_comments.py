@@ -3,7 +3,7 @@ import pandas as pd
 from tqdm import tqdm
 
 # 🔑 API 키
-API_KEY = 'AIzaSyC43Ohag0uBkVRGx9vX1G9mZ1evWvW8qS4'  # 여기에 본인 API 키 붙여넣기
+API_KEY = 'YOUR-API-KEY'  # 여기에 본인 API 키 붙여넣기
 VIDEO_ID = 'nqye02H_H6I'       # 유튜브 동영상 ID (링크에서 v= 뒤에 있는 문자열)
 
 # YouTube API 클라이언트 생성
