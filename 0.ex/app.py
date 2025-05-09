@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import torch
+import torch.nn as nn
+from konlpy.tag import Okt
 
 st.title('--Uber pickups in NYC')
 
@@ -51,3 +54,78 @@ st.map(filtered_data)
 
 values = st.text_input("대선 후보 입력")
 st.write('input value:', values)
+
+
+# 감성로드
+# 사전 정의
+index_to_tag = {0: '부정', 1: '긍정'}
+word_to_index = torch.load('word_to_index.pth')  # 예: {'좋다': 5, '싫다': 7, ...}
+stopwords = ['도', '는', '다', '의', '가', '이', '은', '한', '에', '하', '고',
+             '을', '를', '인', '듯', '과', '와', '네', '들', '듯', '지', '임', '게']
+device = torch.device("cpu")
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+okt = Okt()
+
+
+# 모델 클래스 정의 (LSTM 구조에 맞게 반드시 수정)
+class SentimentLSTM(nn.Module):
+    def __init__(self, vocab_size, embedding_dim, hidden_dim, output_dim):
+        super(SentimentLSTM, self).__init__()
+        self.embedding = nn.Embedding(vocab_size, embedding_dim, padding_idx=0)
+        self.lstm = nn.LSTM(embedding_dim, hidden_dim, batch_first=True)
+        self.fc = nn.Linear(hidden_dim, output_dim)
+
+    def forward(self, x):
+        x = self.embedding(x)
+        _, (hidden, _) = self.lstm(x)
+        output = self.fc(hidden[-1])
+        return output
+
+# 캐시된 모델 로드
+@st.cache_resource
+def load_model():
+    vocab_size = 17403  # vocab_size 수정 (체크포인트와 일치하도록)
+    embedding_dim = 100
+    hidden_dim = 128
+    output_dim = 2
+    model = SentimentLSTM(vocab_size, embedding_dim, hidden_dim, output_dim).to(device)
+    model.load_state_dict(torch.load('best_model_checkpoint.pth', map_location=device), strict=False)
+    model.eval()
+    return model
+
+# 모델 로드
+model = load_model()
+
+# 체크포인트와 일치하는 vocab_size로 모델 로드
+vocab_size = 17403  # 체크포인트와 일치하도록 수정
+embedding_dim = 100
+hidden_dim = 128
+output_dim = 2
+
+model = SentimentLSTM(vocab_size, embedding_dim, hidden_dim, output_dim).to(device)
+model.load_state_dict(torch.load('best_model_checkpoint.pth', map_location=device), strict=False)
+model.eval()
+
+# 예측 함수
+def predict(text):
+    tokens = okt.morphs(text, stem=True)
+    tokens = [word for word in tokens if word not in stopwords]
+    token_indices = [word_to_index.get(word, 1) for word in tokens]
+    input_tensor = torch.tensor([token_indices], dtype=torch.long).to(device)
+
+    with torch.no_grad():
+        logits = model(input_tensor)
+        predicted_index = torch.argmax(logits, dim=1).item()
+        return index_to_tag[predicted_index]
+
+# Streamlit UI
+st.title("감성 분석 (LSTM 기반)")
+
+user_input = st.text_input("문장을 입력하세요:")
+
+if st.button("예측"):
+    if user_input:
+        result = predict(user_input)
+        st.write(f"👉 예측 결과: **{result}**")
+    else:
+        st.warning("문장을 입력해주세요.")
