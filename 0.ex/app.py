@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 from konlpy.tag import Okt
+import pickle
 
 st.title('--Uber pickups in NYC')
 
@@ -56,7 +57,25 @@ values = st.text_input("대선 후보 입력")
 st.write('input value:', values)
 
 
-# 감성로드
+
+# 2. 집값 예측 모델
+
+with open("xgboost_feature_full.pkl", "rb") as f:
+    model = pickle.load(f)
+
+st.title("XGBoost Prediction App")
+
+# 입력 받기 예시
+age = st.number_input("Enter Age")
+income = st.number_input("Enter Income")
+
+# 예측
+if st.button("Predict"):
+    input_df = pd.DataFrame([[age, income]], columns=["age", "income"])
+    pred = model.predict(input_df)
+    st.write("Prediction:", pred[0])
+
+# 3. 감성로드
 # 사전 정의
 index_to_tag = {0: '부정', 1: '긍정'}
 word_to_index = torch.load('word_to_index.pth')  # 예: {'좋다': 5, '싫다': 7, ...}
