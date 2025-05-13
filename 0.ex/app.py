@@ -60,7 +60,7 @@ st.write('input value:', values)
 
 # 2. 집값 예측 모델
 
-with open("xgboost_feature_full.pkl", "rb") as f:
+with open("model/xgboost_feature_full.pkl", "rb") as f:
     model = pickle.load(f)
 
 st.title("XGBoost Prediction App")
@@ -78,7 +78,7 @@ if st.button("Predict"):
 # 3. 감성로드
 # 사전 정의
 index_to_tag = {0: '부정', 1: '긍정'}
-word_to_index = torch.load('word_to_index.pth')  # 예: {'좋다': 5, '싫다': 7, ...}
+word_to_index = torch.load('model/word_to_index.pth')  # 예: {'좋다': 5, '싫다': 7, ...}
 stopwords = ['도', '는', '다', '의', '가', '이', '은', '한', '에', '하', '고',
              '을', '를', '인', '듯', '과', '와', '네', '들', '듯', '지', '임', '게']
 device = torch.device("cpu")
@@ -108,7 +108,7 @@ def load_model():
     hidden_dim = 128
     output_dim = 2
     model = SentimentLSTM(vocab_size, embedding_dim, hidden_dim, output_dim).to(device)
-    model.load_state_dict(torch.load('best_model_checkpoint.pth', map_location=device), strict=False)
+    model.load_state_dict(torch.load('model/best_model_checkpoint.pth', map_location=device), strict=False)
     model.eval()
     return model
 
@@ -122,7 +122,7 @@ hidden_dim = 128
 output_dim = 2
 
 model = SentimentLSTM(vocab_size, embedding_dim, hidden_dim, output_dim).to(device)
-model.load_state_dict(torch.load('best_model_checkpoint.pth', map_location=device), strict=False)
+model.load_state_dict(torch.load('model/best_model_checkpoint.pth', map_location=device), strict=False)
 model.eval()
 
 # 예측 함수
